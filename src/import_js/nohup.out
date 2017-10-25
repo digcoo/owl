@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "transfer_stock_time_2_mongo.py", line 11, in <module>
+    from ParseUtil import *
+  File "/home/ubuntu/scripts/utils/ParseUtil.py", line 9, in <module>
+    from vo.StockInfo import *
+ImportError: No module named vo.StockInfo
