@@ -20,6 +20,9 @@ class RedisClient:
 	self.key_day = 'day'			
 	self.key_time = 'time'			#分时推荐map-time:key
 
+    def get(self, key):
+	return eval(self.client.get(key))
+
     def keys(self):
 	return self.client.keys()
 
@@ -35,12 +38,12 @@ class RedisClient:
 	if local_rec_stocks_map is None:
 	    local_rec_stocks_map = {}
 	
-	if type == 'day':
-	    local_rec_stocks_map[self.key_day] = stocks
-	elif type == 'time':
-	    local_rec_stocks_map[self.key_time] = stocks
-
-	self.client.set(str(key), local_rec_stocks_map)
+#	if type == 'day':
+#	    local_rec_stocks_map[self.key_day] = stocks
+#	elif type == 'time':
+#	    local_rec_stocks_map[self.key_time] = stocks
+#	self.client.set(str(key), local_rec_stocks_map)
+	self.client.set(type, stocks)
 
     def put_stock_today(self, stock):
 	final_stocks = None

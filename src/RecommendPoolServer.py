@@ -39,15 +39,12 @@ class DateEncoder(json.JSONEncoder):
 def recommend():
     try:
         response.set_header("Access-Control-Allow-Origin", "*")
-	day_data = redis_client.query_latest_rec('day')
-	day_stocks = convert_json(day_data)
-	time_data = redis_client.query_latest_rec('time')
-	time_stocks = convert_json(time_data)
-	final_stocks = []
-	final_stocks.extend(day_stocks)
-	final_stocks.extend(time_stocks)
-	ret_data = json.dumps(final_stocks)
-	return ret_data
+	all_hits = []
+	day_hits = redis_client.get('day')
+	time_hits = redis_client.get('time')
+	all_hits.extend(day_hits)
+	all_hits.extend(time_hits)
+	return jsonpickle.encode(convert_json(all_hits))
     except Exception, e:
         print e
 
